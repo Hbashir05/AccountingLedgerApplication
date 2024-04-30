@@ -16,4 +16,5 @@ public class Payment {
         // Return string
         return (item + "|" + vendor + "|" + cost);
     }
+
 }

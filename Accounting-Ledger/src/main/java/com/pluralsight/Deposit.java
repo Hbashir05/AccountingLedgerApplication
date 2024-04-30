@@ -1,12 +1,13 @@
 package com.pluralsight;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.pluralsight.Ledger.bufferedWriter;
-import static com.pluralsight.Ledger.scanner;
+import static com.pluralsight.Ledger.*;
 
 public class Deposit {
     public static String addDeposit() {
@@ -31,8 +32,10 @@ public class Deposit {
         String entry = (date+"|"+time.format(DateTimeFormatter.ofPattern("HH:mm:ss"))+"|"+action+"\n");
 
         try {
-            // Write the date, time and action to the ledger.csv file
-            bufferedWriter.write(entry);
+            BufferedWriter bufferedWriter1 = new BufferedWriter(new FileWriter("ledger1.csv", true));
+            // Write the date, time and action to the ledger1.csv file
+            bufferedWriter1.write(entry);
+            bufferedWriter1.close();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }

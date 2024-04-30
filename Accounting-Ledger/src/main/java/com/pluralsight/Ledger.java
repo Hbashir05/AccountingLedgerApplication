@@ -1,14 +1,12 @@
 package com.pluralsight;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static com.pluralsight.Deposit.addDeposit;
 import static com.pluralsight.Deposit.writeToCSV;
 import static com.pluralsight.Payment.addPayment;
+import static com.pluralsight.Reports.*;
 
 public class Ledger {
     // Create a scanner object for user input
@@ -19,13 +17,12 @@ public class Ledger {
 
     static {
         try {
-            bufferedWriter = new BufferedWriter(new FileWriter("ledger.csv", true));
-            bufferedReader = new BufferedReader(new FileReader("ledger.csv"));
+            bufferedWriter = new BufferedWriter(new FileWriter("ledger1.csv", true));
+            bufferedReader = new BufferedReader(new FileReader("ledger1.csv"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-    // Create an arraylist for the
 
     public static void main(String[] args) throws IOException {
         System.out.println("Welcome to Ledger");
@@ -97,6 +94,7 @@ public class Ledger {
         // Prints all entries to the terminal
         String input;
         try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("ledger1.csv"));
             while ((input = bufferedReader.readLine()) != null) {
                 System.out.println(input);
             }
@@ -108,6 +106,7 @@ public class Ledger {
         // Shows all deposits recorded in the ledger
         String input;
         try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("ledger1.csv"));
             while ((input = bufferedReader.readLine()) != null) {
                 String[] tokens = input.split("\\|");
                 if (Double.parseDouble(tokens[4]) > 0){
@@ -122,21 +121,7 @@ public class Ledger {
         // Shows all payments recorded in the ledger
         String input;
         try {
-            while ((input = bufferedReader.readLine()) != null) {
-                String[] tokens = input.split("\\|");
-                if (Double.parseDouble(tokens[4]) < 0){
-                    System.out.println(input);
-                }
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public static void viewReports() {
-        // Shows all payments recorded in the ledger
-        String input;
-        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("ledger1.csv"));
             while ((input = bufferedReader.readLine()) != null) {
                 String[] tokens = input.split("\\|");
                 if (Double.parseDouble(tokens[4]) < 0){
