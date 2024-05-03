@@ -7,8 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static com.pluralsight.Ledger.homeScreen;
-import static com.pluralsight.Ledger.scanner;
+import static com.pluralsight.Ledger.*;
 
 public class Reports {
 
@@ -24,7 +23,9 @@ public class Reports {
         System.out.println("3) Year To Date");
         System.out.println("4) Previous Year");
         System.out.println("5) Search by Vendor");
-        System.out.println("6) Back");
+        System.out.println("6) Back to Ledger Screen");
+        System.out.println("7) Back to Home Screen");
+
 
         int choice = scanner.nextInt();
         scanner.nextLine();
@@ -45,16 +46,17 @@ public class Reports {
             searchByVendor();
             viewReports();
         } else if (choice==6) {
+            ledgerScreen();
+        } else if (choice==7) {
             homeScreen();
         } else {
             System.out.println("Invalid input");
-            viewReports();
+
         }
     }
     // Displays all entries from the current month
     public static void monthToDate() {
         String input;
-
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("ledger1.csv"));
             while ((input = bufferedReader.readLine()) != null) {
@@ -62,6 +64,7 @@ public class Reports {
                 String[] date = tokens[0].split("-");
                 if (Double.parseDouble(date[1]) == thisMonth && Double.parseDouble(date[0]) == thisYear) {
                     entries.add(input);
+                    viewReports();
                 }
             }
             sortArray(entries);
