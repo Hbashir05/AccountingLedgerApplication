@@ -23,7 +23,7 @@ public class Deposit {
         // Return the string
         return (description+"|"+vendor+"|"+amount);
     }
-
+    //Tells the class and anything related to write to the Csv file in a specific format
     public static void writeToCSV(String action) {
         // Get the local date and time
         LocalDate date = LocalDate.now();

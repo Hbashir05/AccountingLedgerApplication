@@ -37,8 +37,8 @@ public class Ledger {
         // Display the home screen
         System.out.println("1) Add Deposit");
         System.out.println("2) Make Payment");
-        System.out.println("3) Ledger");
-        System.out.println("4) Exit");
+        System.out.println("3) Ledger Screen");
+        System.out.println("4) Exit Program");
 
         int choice = scanner.nextInt(); // Get user input
         scanner.nextLine(); // Consume the newline
@@ -67,10 +67,10 @@ public class Ledger {
 
     public static void ledgerScreen() {
         System.out.println("1) All Entries");
-        System.out.println("2) Deposits");
-        System.out.println("3) Payments");
-        System.out.println("4) Reports");
-        System.out.println("5) Home");
+        System.out.println("2) All Deposits");
+        System.out.println("3) ALl Payments");
+        System.out.println("4) Enter Reports");
+        System.out.println("5) Home Screen");
 
         int choice = scanner.nextInt();
         scanner.nextLine();
