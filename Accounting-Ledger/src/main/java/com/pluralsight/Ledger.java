@@ -1,7 +1,9 @@
 package com.pluralsight;
 
 import java.io.*;
+import java.util.Collections;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 import static com.pluralsight.Deposit.addDeposit;
 import static com.pluralsight.Deposit.writeToCSV;
@@ -14,6 +16,7 @@ public class Ledger {
     // Create buffered writer object to write to the csv file
     static BufferedWriter bufferedWriter;
     static BufferedReader bufferedReader;
+    static ArrayList <String> entries = new ArrayList<>();
 
     static {
         try {
@@ -25,7 +28,7 @@ public class Ledger {
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Welcome to Ledger");
+        System.out.println("Welcome to the Ledger");
         homeScreen();
 
     }
@@ -90,14 +93,24 @@ public class Ledger {
             ledgerScreen();
         }
     }
+    public static void sortArray(ArrayList<String> items){
+        Collections.reverse(items);
+        for (String entry : items){
+            System.out.println(entry);
+        }
+        items.clear();
+    }
+
     public static void allEntries() {
         // Prints all entries to the terminal
         String input;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader("ledger1.csv"));
             while ((input = bufferedReader.readLine()) != null) {
-                System.out.println(input);
+                entries.add(input);
             }
+            sortArray(entries);
+            bufferedReader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -110,9 +123,11 @@ public class Ledger {
             while ((input = bufferedReader.readLine()) != null) {
                 String[] tokens = input.split("\\|");
                 if (Double.parseDouble(tokens[4]) > 0){
-                    System.out.println(input);
+                    entries.add(input);
                 }
             }
+            sortArray(entries);
+            bufferedReader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -125,10 +140,11 @@ public class Ledger {
             while ((input = bufferedReader.readLine()) != null) {
                 String[] tokens = input.split("\\|");
                 if (Double.parseDouble(tokens[4]) < 0){
-                    System.out.println(input);
+                   entries.add(input);
                 }
             }
-
+            sortArray(entries);
+            bufferedReader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
