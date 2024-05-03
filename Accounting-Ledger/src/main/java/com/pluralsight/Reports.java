@@ -51,7 +51,7 @@ public class Reports {
             homeScreen();
         } else {
             System.out.println("Invalid input");
-
+            viewReports();
         }
     }
     // Displays all entries from the current month
@@ -62,13 +62,16 @@ public class Reports {
             while ((input = bufferedReader.readLine()) != null) {
                 String[] tokens = input.split("\\|");
                 String[] date = tokens[0].split("-");
-                if (Double.parseDouble(date[1]) == thisMonth && Double.parseDouble(date[0]) == thisYear) {
+                if (Integer.parseInt(date[1]) == thisMonth && Integer.parseInt(date[0]) == thisYear) {
                     entries.add(input);
-                    viewReports();
                 }
             }
-            sortArray(entries);
             bufferedReader.close();
+            if (!entries.isEmpty()) {
+                sortArray(entries);
+            } else {
+                System.out.println("No entries found for the current month.");
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
